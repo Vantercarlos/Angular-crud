@@ -8,6 +8,9 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductService {
+  showMessage(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
   baseUrl = "http://localhost:3001/products"
 
@@ -28,5 +31,15 @@ export class ProductService {
 
   read(): Observable<Product[]>{
     return this.http.get<Product[]>(this.baseUrl)
+  }
+
+  readById(id: string): Observable<Product>{
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Product>(url)
+  }
+
+  update(product: Product): Observable<Product>{
+    const url = `${this.baseUrl}/${product.id}`
+    return this.http.put<Product>(url, product)
   }
 }
